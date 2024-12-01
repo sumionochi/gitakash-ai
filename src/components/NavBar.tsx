@@ -25,6 +25,7 @@ import { Separator } from './ui/separator';
 import { UserProfile } from './UserProfile';
 import { createClient } from '@/utils/supabase/client';
 import LoginButton from './Log';
+import { SidebarTrigger } from './ui/sidebar';
 
 type Props = {};
 
@@ -55,17 +56,11 @@ const NavBar = (props: Props) => {
   };
 
   return (
-    <div className='w-full sticky top-0 z-20 bg-white dark:bg-black p-4 border-b'>
+    <div className='w-full sticky top-0 z-20 bg-white dark:bg-black p-[0.56rem] border-b'>
       <div className='max-w-7xl w-full mx-auto'>
         <div className='flex flex-row w-full items-center justify-between'>
           <div className='relative gap-2 h-10 flex flex-row items-center justify-center'>
-            <div
-              onClick={handleScrollToTop}
-              className='text-xl relative flex flex-row text-center duration-1000 cursor-pointer animate-title whitespace-normal items-center'
-            >
-              <p>gitAkash.ai</p>
-              <MousePointerClick className='w-6 h-6 ml-1 whitespace-nowrap' />
-            </div>
+            <SidebarTrigger/>
           </div>
           <div className='flex flex-row items-center gap-2 sm:hidden'>
             <button onClick={toggleSheet}>

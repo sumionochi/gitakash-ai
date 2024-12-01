@@ -4,6 +4,9 @@ import './globals.css'
 import { cn } from '../lib/utils'
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Toaster } from "sonner";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarMain } from "@/components/SideBarMain";
+import NavBar from "@/components/NavBar";
 
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
@@ -23,7 +26,14 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
-              {children}
+              <SidebarProvider>
+                <SidebarMain />
+                <div className="w-full">
+                  <div className="h-[2px] relative z-30 bg-gradient-to-r from-yellow-500 via-purple-500 to-green-500" />
+                  <NavBar/>
+                </div>
+                <main className="">{children}</main>
+              </SidebarProvider>
               <Toaster />
             </ThemeProvider>
       </body>
