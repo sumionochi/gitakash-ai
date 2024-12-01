@@ -63,7 +63,7 @@ const NavBar = (props: Props) => {
               onClick={handleScrollToTop}
               className='text-xl relative flex flex-row text-center duration-1000 cursor-pointer animate-title whitespace-normal items-center'
             >
-              <p>InstaTryOn</p>
+              <p>gitAkash.ai</p>
               <MousePointerClick className='w-6 h-6 ml-1 whitespace-nowrap' />
             </div>
           </div>
@@ -73,7 +73,7 @@ const NavBar = (props: Props) => {
             </button>
           </div>
           <NavigationMenu className='hidden sm:flex'>
-            <NavigationMenuList className='flex gap-10 items-center'>
+            <NavigationMenuList className='flex gap-6 items-center'>
               <UserProfile />
               <ModeToggle />
             </NavigationMenuList>
