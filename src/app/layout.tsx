@@ -28,11 +28,13 @@ export default function RootLayout({
             >
               <SidebarProvider>
                 <SidebarMain />
-                <div className="w-full">
-                  <div className="h-[2px] relative z-30 bg-gradient-to-r from-yellow-500 via-purple-500 to-green-500" />
-                  <NavBar/>
+                <div className="w-full flex flex-col">
+                  <div className="w-full">
+                    <div className="h-[2px] relative z-30 bg-gradient-to-r from-yellow-500 via-purple-500 to-green-500" />
+                    <NavBar/>
+                  </div>
+                  <main className="">{children}</main>
                 </div>
-                <main className="">{children}</main>
               </SidebarProvider>
               <Toaster />
             </ThemeProvider>

@@ -35,26 +35,53 @@ export function UserProfile() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (error) {
+        console.error("Error fetching user from Supabase:", error);
+        setLoading(false);
+        return;
+      }
+  
       if (user) {
         setUser(user);
-
-        const { data, error } = await supabase
+  
+        // Check for profile in Supabase
+        const { data: profileData, error: profileError } = await supabase
           .from('profiles')
           .select('*')
-          .eq('id', user.id)  
-          .single();          
-
-        if (error) {
-          console.error('Error fetching profile:', error);
+          .eq('id', user.id)
+          .single();
+  
+        if (profileError) {
+          console.error('Error fetching profile:', profileError);
         } else {
-          setProfile(data);  
+          setProfile(profileData);
+        }
+  
+        // Sync user data with Prisma
+        const prismaResponse = await fetch("/api/sync-user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: user.id,
+            email: user.email,
+            avatarUrl: user.user_metadata?.avatar_url,
+            fullName: user.user_metadata?.full_name,
+          }),
+        });
+  
+        if (!prismaResponse.ok) {
+          console.error("Error syncing user with Prisma:", await prismaResponse.text());
         }
       }
-      setLoading(false); 
+  
+      setLoading(false);
     };
+  
     fetchUser();
-  }, [supabase]);
+  }, [supabase]);  
 
   const handleLogout = async () => {
     await signout();  

@@ -77,7 +77,6 @@ export function SidebarMain() {
   if (loading) {
     return (
       <div className="flex h-screen w-[240px] items-center justify-center bg-background">
-        <Loader className="h-6 w-6 animate-spin" />
       </div>
     )
   }
@@ -129,9 +128,11 @@ export function SidebarMain() {
               ))}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <button className="flex w-full items-center gap-2 text-muted-foreground border">
+                  <button className="flex rounded-md p-1 w-full items-center gap-2 text-muted-foreground border"> 
+                  <Link href={"/create"} className="flex flex-row gap-2 items-center">
                     <Plus className="size-4" />
                     Create Project
+                  </Link>
                   </button>
                 </SidebarMenuButton>
               </SidebarMenuItem>
